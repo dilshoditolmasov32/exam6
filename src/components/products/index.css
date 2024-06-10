@@ -50,3 +50,40 @@
   justify-content: end;
   margin-top: 50px;
 }
+
+@media (max-width: 600px) {
+  .product_about {
+    display: flex;
+    gap: 30px;
+    margin-top: -550px;
+    margin-left: 0px;
+    transition: 0.5s;
+  }
+
+  .product_card {
+    width: 240px;
+  }
+}
+
+@media (max-width: 545px) {
+  .product_about {
+    display: flex;
+    gap: 30px;
+  }
+
+  .product_card {
+    width: 200px;
+  }
+}
+
+@media (max-width: 460px) {
+  .product_about {
+    display: flex;
+    gap: 30px;
+  }
+
+  .product_card {
+    max-width: 250px;
+    width: 100%;
+  }
+}

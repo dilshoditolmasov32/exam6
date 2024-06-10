@@ -21,53 +21,48 @@ const Index = () => {
       .then((res) => setData(res.data))
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err))
-      .finally((loading) => <h2>loading..</h2>);
   }, [page]);
 
   return (
     <div className="products-page">
       <div className="container">
         <div className="product_about">
-          {data ? (
-            data.map((element) => (
-              <Card
-                sx={{ maxWidth: 345 }}
-                key={element.id}
-                className="product_card"
-              >
-                <NavLink to={`product/${element.id}`}>
-                  <img
-                    src={element.image}
-                    alt={element.title}
-                    className="product_image"
-                  />
-                </NavLink>
+          {data?.map((element) => (
+            <Card
+              sx={{ maxWidth: 345 }}
+              key={element.id}
+              className="product_card"
+            >
+              <NavLink to={`product/${element.id}`}>
+                <img
+                  src={element.image}
+                  alt={element.title}
+                  className="product_image"
+                />
+              </NavLink>
 
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    className="product_title"
-                  >
-                    {element.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    className="product_desc"
-                  >
-                    {element.description}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="medium">More</Button>
-                </CardActions>
-              </Card>
-            ))
-          ) : (
-            <h2>Loading...</h2>
-          )}
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  className="product_title"
+                >
+                  {element.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  className="product_desc"
+                >
+                  {element.description}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="medium">More</Button>
+              </CardActions>
+            </Card>
+          ))}
         </div>
 
         <div className="pagination">

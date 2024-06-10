@@ -13,7 +13,7 @@ function Header(props) {
   const { onDrawerToggle } = props;
 
   return (
-    <AppBar>
+    <AppBar className="header">
       <Toolbar className="toolbar">
         <Grid container spacing={1} alignItems="center">
           <Grid item sx={{ display: { sm: "none", xs: "block" } }}>

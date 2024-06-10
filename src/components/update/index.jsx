@@ -1,13 +1,13 @@
-const Index = () => {
+import Rodal from "../modal";
+import "./index.css";
+const Index = (props) => {
+  console.log(props);
   return (
-    // <Rodal
-    //   submit={handleSubmit}
-    //   change={handleChange}
-    //   openVisible={openVisible}
-    //   setOpenVisible={setOpenVisible}
-    // />
+    <>
+      <Rodal className="modal" />
 
-    <h1 style={{ marginLeft: 300 }}>Update</h1>
+      <h1 style={{ marginLeft: 300 }}>hello</h1>
+    </>
   );
 };
 

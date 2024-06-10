@@ -1,4 +1,4 @@
-import CardBtn from "./cardAdd/";
+import CardBtn from "../../cardAdd";
 import "./index.css";
 const Index = () => {
   return (

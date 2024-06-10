@@ -6,11 +6,13 @@ import {
 } from "react-router-dom";
 
 import App from "../../App";
-import Login from "../login";
+import Login from "../pages/login";
 import Dashboard from "../dashboard/index";
 import Products from "../products";
-import Tasks from "../tasks";
+import Tasks from "../pages/tasks";
+import Product from "../pages/single-page";
 import Update from "../update";
+
 const Index = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -18,8 +20,9 @@ const Index = () => {
         <Route index element={<Login />} />
         <Route path="/dashboard/*" element={<Dashboard />}>
           <Route index element={<Products />} />
+          <Route path="product/:id" element={<Product />} />
           <Route path="tasks" element={<Tasks />} />
-          <Route path="update/:id" element={<Update />} />
+          <Route path="tasks/update/:id" element={<Update />} />
         </Route>
       </Route>
     )

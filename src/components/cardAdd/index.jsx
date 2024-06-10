@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { MdDeleteOutline, MdModeEdit } from "react-icons/md";
-import Rodal from "../../modal";
+import Rodal from "../modal"
 import { nanoid } from "nanoid";
-import "../index.css";
+import "../pages/tasks/index.css";
 import { NavLink } from "react-router-dom";
 
 const Index = ({ title }) => {

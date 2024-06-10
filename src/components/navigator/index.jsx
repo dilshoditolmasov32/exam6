@@ -1,15 +1,12 @@
 import * as React from "react";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import PeopleIcon from "@mui/icons-material/People";
-import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
 import { NavLink } from "react-router-dom";
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { FaTasks } from "react-icons/fa";
+
 import "./index.css";
 
 const item = {
@@ -34,20 +31,35 @@ export default function Navigator(props) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding className="navigator-dashboard">
         <ListItem
-          sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}
+          sx={{
+            ...item,
+            ...itemCategory,
+            fontSize: 22,
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+          }}
         >
+          <span>
+            <LuLayoutDashboard />
+          </span>
           Dashboard
         </ListItem>
 
         <ul className="navigator">
           <NavLink to="/dashboard">
             <li>
+              <span>
+                <MdProductionQuantityLimits />
+              </span>
               Products
             </li>
           </NavLink>
           <NavLink to="/dashboard/tasks">
             <li>
-             
+              <span>
+                <FaTasks />
+              </span>
               Tasks
             </li>
           </NavLink>

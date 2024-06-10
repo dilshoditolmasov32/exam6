@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaTasks } from "react-icons/fa";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 import "./index.css";
 
@@ -61,6 +62,14 @@ export default function Navigator(props) {
                 <FaTasks />
               </span>
               Tasks
+            </li>
+          </NavLink>
+          <NavLink to="/">
+            <li className="logout">
+              <span>
+                <RiLogoutCircleLine />
+              </span>
+              Logout
             </li>
           </NavLink>
         </ul>

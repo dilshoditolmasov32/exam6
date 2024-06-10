@@ -14,13 +14,14 @@ import "./index.css";
 const Index = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const limit = 3;
+
   useEffect(() => {
     axios
-      .get(`https://fakestoreapi.com/products?limit=${page}&skip=${limit}`)
+      .get(`https://fakestoreapi.com/products?limit=${page}`)
       .then((res) => setData(res.data))
-      // .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
+      .finally((loading) => <h2>loading..</h2>);
   }, [page]);
 
   return (

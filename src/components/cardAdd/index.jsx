@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { MdDeleteOutline, MdModeEdit } from "react-icons/md";
-import Rodal from "../modal"
+import Rodal from "../modal";
 import { nanoid } from "nanoid";
 import "../pages/tasks/index.css";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Index = ({ title }) => {
   const [openVisible, setOpenVisible] = useState(false);
   const [inputData, setInputData] = useState({});
   const [data, setData] = useState([]);
+  const [editData, setEditData] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,17 +19,43 @@ const Index = ({ title }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const id = nanoid();
-    const nanoId = { ...inputData, id };
-    data.push(nanoId);
-    setData([...data]);
+
+    if (editData.id) {
+      let new_data = data?.map((item) => {
+        if (item.id === editData.id) {
+          item.firstname = inputData.firstname
+            ? inputData.firstname
+            : item.firstname;
+          item.option = inputData.option ? inputData.option : item.option;
+        }
+
+        return item;
+      });
+
+      setData([...new_data]);
+      toast.info("Task ma'lumotlari o'zgartirildi")
+    } else {
+      const id = nanoid();
+      const nanoId = { ...inputData, id };
+      data.push(nanoId);
+      setData([...data]);
+      e.target.reset();
+      toast.success("Yangi task yaratildi");
+    }
+
     setOpenVisible(false);
-    e.target.reset();
   }
 
   const handleDeleteClick = (id) => {
     const new_user = data.filter((el) => el.id !== id);
     setData(new_user);
+    toast.info("Task o'chirildi");
+  };
+
+  const handleEditClick = (item) => {
+    setEditData(item);
+    setOpenVisible(true);
+    console.log(item);
   };
 
   return (
@@ -53,7 +81,7 @@ const Index = ({ title }) => {
             >
               <MdDeleteOutline />
             </button>
-            <NavLink to={`update/${item.id}`}>
+            <NavLink onClick={() => handleEditClick(item)}>
               <button className="btn btn-info">
                 <MdModeEdit />
               </button>
@@ -63,6 +91,7 @@ const Index = ({ title }) => {
       </ul>
 
       <Rodal
+        editData={editData}
         submit={handleSubmit}
         change={handleChange}
         openVisible={openVisible}

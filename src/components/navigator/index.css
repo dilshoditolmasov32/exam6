@@ -13,8 +13,14 @@
   margin-left: -20px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: rgba(21, 115, 246, 0.489);
   cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.08);
+
+  transition: 0.5s;
+}
+
+.navigator li:hover {
+  background: #0d6efd;
 }
 
 .navigator {
@@ -27,9 +33,7 @@
   font-size: 22px;
 }
 
-.logout{
+.logout {
   color: red;
   font-size: 28px;
 }
-
-

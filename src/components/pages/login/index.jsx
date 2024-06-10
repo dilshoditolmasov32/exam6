@@ -20,10 +20,13 @@ function Copyright(props) {
       align="center"
       {...props}
     >
+      <br /> <br />
+      <p color="inherit">
+        login: john@example.com <br /> parol: 123
+      </p>
       <Link color="inherit" href="https://t.me/dilshodbek_zafarovich">
         Dilshodbek Website
       </Link>
-      {new Date().getFullYear()}
     </Typography>
   );
 }
@@ -80,7 +83,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  value={"john@example.com"}
+                  placeholder={"john@example.com"}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -92,7 +95,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  value={"123"}
+                  placeholder={"123"}
                 />
               </Grid>
             </Grid>

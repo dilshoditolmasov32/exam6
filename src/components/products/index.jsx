@@ -9,25 +9,38 @@ import Typography from "@mui/material/Typography";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { NavLink } from "react-router-dom";
+import Loading from "../loading";
 import "./index.css";
 
 const Index = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`https://fakestoreapi.com/products?limit=${page}`)
-      .then((res) => setData(res.data))
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err))
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [page]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="products-page">
       <div className="container">
         <div className="product_about">
-          {data?.map((element) => (
+          {data.map((element) => (
             <Card
               sx={{ maxWidth: 345 }}
               key={element.id}

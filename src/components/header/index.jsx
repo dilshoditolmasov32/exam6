@@ -7,11 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import "./index.css";
 
-const lightColor = "rgba(255, 255, 255, 0.7)";
-
-function Header(props) {
-  const { onDrawerToggle } = props;
-
+function Header({ onDrawerToggle }) {
   return (
     <AppBar className="header">
       <Toolbar className="toolbar">

@@ -4,7 +4,6 @@ const Index = () => {
   return (
     <div className="container">
       <div className="task_page">
-        <CardBtn title={"Open"} />
         <CardBtn title={"Pending"} />
         <CardBtn title={"Inprog"} />
         <CardBtn title={"Complete"} />

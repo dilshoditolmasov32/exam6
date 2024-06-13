@@ -1,66 +1,77 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import { MdDeleteOutline, MdModeEdit } from "react-icons/md";
 import Rodal from "../modal";
 import { nanoid } from "nanoid";
 import "../pages/tasks/index.css";
-import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Index = ({ title }) => {
   const [openVisible, setOpenVisible] = useState(false);
   const [inputData, setInputData] = useState({});
   const [data, setData] = useState([]);
-  const [editData, setEditData] = useState({});
+  const [editData, setEditData] = useState(null);
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      element: "",
+      status: "Pending",
+    },
+    {
+      id: 2,
+      element: "",
+      status: "Inprog",
+    },
+    {
+      id: 3,
+      element: "",
+      status: "Complete",
+    },
+  ]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInputData({ ...inputData, [name]: value });
+    setInputData((prev) => ({ ...prev, [name]: value }));
   };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (editData.id) {
-      let new_data = data?.map((item) => {
-        if (item.id === editData.id) {
-          item.firstname = inputData.firstname
-            ? inputData.firstname
-            : item.firstname;
-          item.option = inputData.option ? inputData.option : item.option;
-        }
-
-        return item;
-      });
-
-      setData([...new_data]);
-      toast.info("Task ma'lumotlari o'zgartirildi")
-    } else {
-      const id = nanoid();
-      const nanoId = { ...inputData, id };
-      data.push(nanoId);
-      setData([...data]);
-      e.target.reset();
+    if (editData) {
+      setData((prev) =>
+        prev.map((item) =>
+          item.id === editData.id ? { ...item, ...inputData } : item
+        )
+      );
+      toast.info("Task ma'lumotlari o'zgartirildi");
+    }
+    // const el=todos?.map((el, index)=>el=el.status)
+    // console.log(el)
+    else {
+      const newTask = { ...inputData, id: nanoid() };
+      setData((prev) => [...prev, newTask]);
       toast.success("Yangi task yaratildi");
     }
 
     setOpenVisible(false);
-  }
+    setInputData({});
+    setEditData(null);
+  };
 
   const handleDeleteClick = (id) => {
-    const new_user = data.filter((el) => el.id !== id);
-    setData(new_user);
+    setData((prev) => prev.filter((el) => el.id !== id));
     toast.info("Task o'chirildi");
   };
 
   const handleEditClick = (item) => {
     setEditData(item);
+    setInputData(item);
     setOpenVisible(true);
-    console.log(item);
   };
 
   return (
     <div className="form_elements">
-      <form className="form-control p-4  w-100 ">
+      <form className="form-control p-4 w-100">
         <h2>{title}</h2>
         <button
           type="button"
@@ -72,8 +83,8 @@ const Index = ({ title }) => {
       </form>
 
       <ul>
-        {data?.map((item, index) => (
-          <li key={index}>
+        {data.map((item) => (
+          <li key={item.id}>
             <span>{item.firstname}</span>
             <button
               className="btn btn-danger"
@@ -81,8 +92,11 @@ const Index = ({ title }) => {
             >
               <MdDeleteOutline />
             </button>
-            <NavLink onClick={() => handleEditClick(item)}>
-              <button className="btn btn-info">
+            <NavLink to="#">
+              <button
+                className="btn btn-info"
+                onClick={() => handleEditClick(item)}
+              >
                 <MdModeEdit />
               </button>
             </NavLink>
@@ -90,13 +104,15 @@ const Index = ({ title }) => {
         ))}
       </ul>
 
-      <Rodal
-        editData={editData}
-        submit={handleSubmit}
-        change={handleChange}
-        openVisible={openVisible}
-        setOpenVisible={setOpenVisible}
-      />
+      {openVisible && (
+        <Rodal
+          editData={inputData}
+          submit={handleSubmit}
+          change={handleChange}
+          openVisible={openVisible}
+          setOpenVisible={setOpenVisible}
+        />
+      )}
     </div>
   );
 };

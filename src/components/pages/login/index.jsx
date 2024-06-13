@@ -1,17 +1,21 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 function Copyright(props) {
   return (
     <Typography
@@ -21,7 +25,7 @@ function Copyright(props) {
       {...props}
     >
       <br /> <br />
-      <p color="inherit">
+      <p>
         login: john@example.com <br /> parol: 123
       </p>
       <Link color="inherit" href="https://t.me/dilshodbek_zafarovich">
@@ -31,7 +35,7 @@ function Copyright(props) {
   );
 }
 
-const defaultTheme = createTheme();
+const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -51,7 +55,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -83,7 +87,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  placeholder={"john@example.com"}
+                  placeholder="john@example.com"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -95,7 +99,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  placeholder={"123"}
+                  placeholder="123"
                 />
               </Grid>
             </Grid>

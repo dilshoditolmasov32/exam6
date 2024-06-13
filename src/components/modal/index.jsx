@@ -1,52 +1,54 @@
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import { Form, FormGroup } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
-const Index = ({ change, submit, openVisible, setOpenVisible, editData }) => {
+const TaskModal = ({
+  change,
+  submit,
+  openVisible,
+  setOpenVisible,
+  editData,
+}) => {
   return (
     <Rodal visible={openVisible} onClose={() => setOpenVisible(false)}>
       <h3 className="mb-1">Add Task</h3>
       <Form className="w-100" onSubmit={submit}>
-        <FormGroup className="w-100">
+        <Form.Group className="mb-3 w-100">
           <Form.Control
-            className="mb-3 w-100"
             type="text"
             placeholder="FullName"
             name="firstname"
-            defaultValue={editData.firstname}
+            defaultValue={editData.firstname || ""}
             onChange={change}
           />
+        </Form.Group>
 
-          <select 
-          className="form-select" 
-          defaultValue={editData.option}
-          onChange={change}
-           name="option">
-            <option value="option">Select Option</option>
-            <option value="pending">pending</option>
-            <option value="inprog">inprog</option>
-            <option value="complete">complete</option>
-          </select>
+        <Form.Group className="mb-3 w-100">
+          <Form.Select
+            defaultValue={editData.option || "option"}
+            onChange={change}
+            name="option"
+          >
+            <option value="option" disabled>
+              Select Option
+            </option>
+            <option value="pending">Pending</option>
+            <option value="inprog">In Progress</option>
+            <option value="complete">Complete</option>
+          </Form.Select>
+        </Form.Group>
 
-          <div className="d-flex justify-content-end mt-3 gap-2">
-            <button
-              className="btn btn-danger "
-              onClick={() => setOpenVisible(false)}
-            >
-              Close
-            </button>
-            <button
-              className="btn btn-success "
-              type="submit"
-              onSubmit={submit}
-            >
-              Add
-            </button>
-          </div>
-        </FormGroup>
+        <div className="d-flex justify-content-end mt-3 gap-2">
+          <Button variant="danger" onClick={() => setOpenVisible(false)}>
+            Close
+          </Button>
+          <Button variant="success" type="submit">
+            Add
+          </Button>
+        </div>
       </Form>
     </Rodal>
   );
 };
 
-export default Index;
+export default TaskModal;
